@@ -1,4 +1,4 @@
-package day01;
+package sort;
 
 import static utils.Swap.swap;
 

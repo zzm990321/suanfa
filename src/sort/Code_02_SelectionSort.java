@@ -1,7 +1,6 @@
-package day01;
+package sort;
 
 
-import static com.sun.tools.javac.jvm.ByteCodes.swap;
 import static utils.Swap.swap;
 
 /**
