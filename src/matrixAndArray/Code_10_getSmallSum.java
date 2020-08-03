@@ -12,13 +12,51 @@ package matrixAndArray;
 public class Code_10_getSmallSum {
     /**
      * 本题使用归并排序
+     *
      * @param arr
      * @return
      */
-    public int getSmallSum(int[] arr){
-        if(arr == null || arr.length == 0){
+    public int getSmallSum(int[] arr) {
+        if (arr == null || arr.length == 0) {
             return 0;
         }
-        return func(arr,0,arr.length-1);
+        return func(arr, 0, arr.length - 1);
+    }
+
+    public int func(int[] s, int l, int r) {
+        if (l == r) {
+            return 0;
+        }
+        int mid = (l + r) / 2;
+        //递归调用归并并求出其中的小和相加
+        return func(s, l, mid) + func(s, mid + 1, r) + merge(s, l, mid, r);
+    }
+
+    public int merge(int[] s, int left, int mid, int right) {
+        //h是排序后的数组
+        int[] h = new int[right - left + 1];
+        int h1 = 0;
+        int i = left;
+        int j = mid + 1;
+        int smallSum = 0;
+        while (i <= mid && j <= right) {
+            if (s[i] <= s[j]) {
+                //小和相加
+                smallSum += s[i] * (right - j + 1);
+                h[h1++] = s[i++];
+            } else {
+                h[h1++] = s[j++];
+            }
+        }
+        //将剩下数组放进去
+        for (; (j < right + 1) || (i < mid + 1); j++, i++) {
+            h[h1++] = i > mid ? s[j] : s[i];
+        }
+        //排序好的数组放回去
+        for (int k = 0; k != h.length; k++) {
+            s[left++] = h[k];
+        }
+        return smallSum;
+
     }
 }
