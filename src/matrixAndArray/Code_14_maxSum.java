@@ -21,6 +21,24 @@ public class Code_14_maxSum {
         }
         int max = Integer.MIN_VALUE;
         int cur = 0;
-        return 0;
+        int[] s = null;
+        //从第一行开始
+        for (int i = 0; i != m.length; i++) {
+            //产生等于列数的数组用于计算并存储每次结果方便下面相加
+            // 每次从新的一行开始就会刷新
+            s = new int[m[0].length];
+            //开始的这一行往下添加
+            for(int j = i;j != m.length; j++){
+                cur = 0;
+                for (int k = 0; k != s.length; k++) {
+                    //与上面运算的结果相加
+                    s[k] += m[j][k];
+                    cur += s[k];
+                    max = Math.max(max,cur);
+                    cur = cur < 0 ? 0 : cur;
+                }
+            }
+        }
+        return max;
     }
 }
